@@ -10,7 +10,7 @@ See https://openfisca.org/doc/key-concepts/variables.html
 from openfisca_core.periods import MONTH
 from openfisca_core.variables import Variable
 # Import the Entities specifically defined for this tax and benefit system
-from openfisca_yuisekin.entities import 世帯
+from openfisca_japan.entities import 世帯
 
 
 class 福祉給付総額(Variable):

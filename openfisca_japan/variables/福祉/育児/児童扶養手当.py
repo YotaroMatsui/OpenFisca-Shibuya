@@ -5,7 +5,7 @@
 import numpy as np
 from openfisca_core.periods import MONTH
 from openfisca_core.variables import Variable
-from openfisca_yuisekin.entities import 世帯
+from openfisca_japan.entities import 世帯
 
 
 class 児童扶養手当(Variable):

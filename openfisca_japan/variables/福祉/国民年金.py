@@ -6,7 +6,7 @@ from numpy import asarray
 from openfisca_core.indexed_enums import Enum
 from openfisca_core.periods import ETERNITY
 from openfisca_core.variables import Variable
-from openfisca_yuisekin.entities import 人物
+from openfisca_japan.entities import 人物
 
 
 class 国民年金被保険者パターン(Enum):

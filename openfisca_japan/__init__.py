@@ -11,8 +11,8 @@ See https://openfisca.org/doc/key-concepts/tax_and_benefit_system.html
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
-from openfisca_yuisekin import entities
-from openfisca_yuisekin.situation_examples import 夫婦
+from openfisca_japan import entities
+from openfisca_japan.situation_examples import 夫婦
 
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -4,7 +4,6 @@ USER user
 
 WORKDIR /app
 COPY . /app
-
 RUN npm ci
 
 EXPOSE 30000

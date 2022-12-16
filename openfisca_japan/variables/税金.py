@@ -12,7 +12,7 @@ from numpy import maximum as max_
 from openfisca_core.periods import MONTH, YEAR
 from openfisca_core.variables import Variable
 # Import the Entities specifically defined for this tax and benefit system
-from openfisca_yuisekin.entities import 世帯, 人物
+from openfisca_japan.entities import 世帯, 人物
 
 
 class 所得税(Variable):

@@ -9,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 from openfisca_core.indexed_enums import Enum
 from openfisca_core.periods import ETERNITY, MONTH
 from openfisca_core.variables import Variable
-from openfisca_yuisekin.entities import 人物
+from openfisca_japan.entities import 人物
 
 
 class 身体障害者手帳交付年月日(Variable):

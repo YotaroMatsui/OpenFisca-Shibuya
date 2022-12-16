@@ -66,7 +66,7 @@ function App() {
     <YourselfContext.Provider value={yourselfContextValue}>
       <HouseholdContext.Provider value={householdContextValue}>
         <div className="container">
-          <h1>OpenFisca-Yuisekin</h1>
+          <h1>OpenFisca Shibuya (非公式)</h1>
           <hr />
           <div>
             <OpenFiscaForm />

@@ -5,8 +5,8 @@
 import numpy as np
 from openfisca_core.periods import MONTH
 from openfisca_core.variables import Variable
-from openfisca_yuisekin.entities import 世帯
-from openfisca_yuisekin.variables.障害.身体障害者手帳 import 身体障害者手帳等級認定パターン
+from openfisca_japan.entities import 世帯
+from openfisca_japan.variables.障害.身体障害者手帳 import 身体障害者手帳等級認定パターン
 
 
 class 特別児童扶養手当(Variable):

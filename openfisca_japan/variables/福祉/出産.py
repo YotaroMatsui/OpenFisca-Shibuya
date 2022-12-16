@@ -4,7 +4,7 @@ from openfisca_core.holders import set_input_divide_by_period
 from openfisca_core.periods import MONTH
 from openfisca_core.variables import Variable
 
-from openfisca_yuisekin.entities import 人物
+from openfisca_japan.entities import 人物
 
 
 class 最終出産年月日(Variable):

@@ -16,7 +16,7 @@ GitHub のこのリポジトリを自分のアカウントへ fork する
 ### fork したリポジトリを Clone する
 
 ```
-git clone git@github.com:<あなたのGitHub ユーザーネーム>/OpenFisca-Yuisekin.git
+git clone git@github.com:<あなたのGitHub ユーザーネーム>/OpenFisca-japan.git
 ```
 
 ### 環境変数を利用して Python に UTF-8 を強制させる
