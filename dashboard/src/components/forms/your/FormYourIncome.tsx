@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
 export const FormYourIncome = () => {
-  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth()}`;
+  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
   const { household, setHousehold } = useContext(HouseholdContext);
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {

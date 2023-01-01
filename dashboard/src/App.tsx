@@ -4,7 +4,7 @@ import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
 
 function App() {
-  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth()}`;
+  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
 
   const [yourself, setYourself] = useState({
     誕生年月日: undefined,
@@ -12,7 +12,7 @@ function App() {
     精神障害者保健福祉手帳がある: undefined,
     療養手帳がある: undefined,
     配偶者がいる: undefined,
-    子どもがいる: undefined,
+    子どもの数: 0,
   });
   const yourselfContextValue = {
     yourself,
@@ -27,11 +27,19 @@ function App() {
           [yearMonth]: 0,
         },
       },
+      /*
+      子ども0: {
+        誕生年月日: { ETERNITY: undefined },
+        所得: {
+          [yearMonth]: 0,
+        },
+      },
+      */
     },
     世帯: {
       世帯1: {
         保護者一覧: ["あなた"],
-        児童一覧: [],
+        //児童一覧: ["子ども0"],
         児童手当: {
           [yearMonth]: null,
         },

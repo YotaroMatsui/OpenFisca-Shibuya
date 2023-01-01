@@ -20,6 +20,7 @@ export const useCalculate = () => {
         body: JSON.stringify(household),
       });
       const newResultJson = await newResultRes.json();
+      console.log(newResultJson);
       delete newResultJson.世帯.世帯1.保護者一覧;
       delete newResultJson.世帯.世帯1.児童一覧;
       setResult(newResultJson);
