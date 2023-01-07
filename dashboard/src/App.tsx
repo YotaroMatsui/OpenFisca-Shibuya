@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { OpenFiscaForm } from "./components/form";
 import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
+import { CurrentYearMonthContext } from "./contexts/CurrentYearMonthContext";
 
 function App() {
-  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
+  const currentYearMonth = `${new Date().getFullYear()}-${
+    new Date().getMonth() + 1
+  }`;
 
   const [yourself, setYourself] = useState({
     誕生年月日: undefined,
@@ -22,35 +25,26 @@ function App() {
   const [household, setHousehold] = useState({
     世帯員: {
       あなた: {
-        誕生年月日: { ETERNITY: undefined },
+        誕生年月日: { ETERNITY: "" },
         所得: {
-          [yearMonth]: 0,
+          [currentYearMonth]: 0,
         },
       },
-      /*
-      子ども0: {
-        誕生年月日: { ETERNITY: undefined },
-        所得: {
-          [yearMonth]: 0,
-        },
-      },
-      */
     },
     世帯: {
       世帯1: {
         保護者一覧: ["あなた"],
-        //児童一覧: ["子ども0"],
         児童手当: {
-          [yearMonth]: null,
+          [currentYearMonth]: null,
         },
         児童扶養手当: {
-          [yearMonth]: null,
+          [currentYearMonth]: null,
         },
         特別児童扶養手当: {
-          [yearMonth]: null,
+          [currentYearMonth]: null,
         },
         障害児童育成手当: {
-          [yearMonth]: null,
+          [currentYearMonth]: null,
         },
       },
     },
@@ -71,41 +65,51 @@ function App() {
   }, []);
 
   return (
-    <YourselfContext.Provider value={yourselfContextValue}>
-      <HouseholdContext.Provider value={householdContextValue}>
-        <div className="container">
-          <h1>OpenFisca Shibuya (非公式)</h1>
-          <hr />
-          <div>
-            <OpenFiscaForm />
+    <CurrentYearMonthContext.Provider value={currentYearMonth}>
+      <YourselfContext.Provider value={yourselfContextValue}>
+        <HouseholdContext.Provider value={householdContextValue}>
+          <div className="container">
+            <h1>OpenFisca Shibuya (非公式)</h1>
+            <hr />
+            <div>
+              <OpenFiscaForm />
+            </div>
+            <hr />
+            <div>
+              <h2>仕様</h2>
+              {spec && (
+                <>
+                  <details>
+                    <summary>世帯</summary>
+                    <pre>
+                      {JSON.stringify(
+                        spec.definitions.世帯.properties,
+                        null,
+                        2
+                      )}
+                    </pre>
+                  </details>
+                  <details>
+                    <summary>人物</summary>
+                    <pre>
+                      {JSON.stringify(
+                        spec.definitions.人物.properties,
+                        null,
+                        2
+                      )}
+                    </pre>
+                  </details>
+                  <details>
+                    <summary>エンドポイント</summary>
+                    <pre>{JSON.stringify(spec.paths, null, 2)}</pre>
+                  </details>
+                </>
+              )}
+            </div>
           </div>
-          <hr />
-          <div>
-            <h2>仕様</h2>
-            {spec && (
-              <>
-                <details>
-                  <summary>世帯</summary>
-                  <pre>
-                    {JSON.stringify(spec.definitions.世帯.properties, null, 2)}
-                  </pre>
-                </details>
-                <details>
-                  <summary>人物</summary>
-                  <pre>
-                    {JSON.stringify(spec.definitions.人物.properties, null, 2)}
-                  </pre>
-                </details>
-                <details>
-                  <summary>エンドポイント</summary>
-                  <pre>{JSON.stringify(spec.paths, null, 2)}</pre>
-                </details>
-              </>
-            )}
-          </div>
-        </div>
-      </HouseholdContext.Provider>
-    </YourselfContext.Provider>
+        </HouseholdContext.Provider>
+      </YourselfContext.Provider>
+    </CurrentYearMonthContext.Provider>
   );
 }
 

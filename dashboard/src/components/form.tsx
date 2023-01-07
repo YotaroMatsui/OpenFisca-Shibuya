@@ -1,5 +1,3 @@
-import { useContext, useEffect } from "react";
-import { HouseholdContext } from "../contexts/HouseholdContext";
 import { useCalculate } from "../hooks/calculate";
 import { FormYou } from "./forms/you";
 import { FormChildren } from "./forms/children";

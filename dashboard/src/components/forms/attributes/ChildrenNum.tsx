@@ -1,9 +1,14 @@
 import { useCallback, useContext } from "react";
+import { CurrentYearMonthContext } from "../../../contexts/CurrentYearMonthContext";
 import { YourselfContext } from "../../../contexts/YourselfContext";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
-export const FormYourChild = () => {
-  const yearMonth = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`;
+export const ChildrenNum = () => {
+  const lastYearDate = `${new Date().getFullYear() - 1}-${(
+    new Date().getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}-01`;
   const { yourself, setYourself } = useContext(YourselfContext);
   const { household, setHousehold } = useContext(HouseholdContext);
 
@@ -18,29 +23,29 @@ export const FormYourChild = () => {
     });
     setYourself({ ...newYourself });
 
-    // 世帯情報を更新
-    let newHousehold = { ...household };
-
-    for (let i = 0; i < childrenNum; i++) {
-      /*
-      const childName = `子ども${i}`;
-      newHousehold = {
-        ...newHousehold,
-        世帯員: {
-          ...newHousehold.世帯員,
-          [childName]: {},
-        },
-      };
-      */
-      newHousehold.世帯員[`子ども${i}`] = {
-        誕生年月日: { ETERNITY: "" },
-      };
+    // 変更前の子どもの情報を削除
+    const newHousehold = { ...household };
+    if (household.世帯.世帯1.児童一覧) {
+      household.世帯.世帯1.児童一覧.map((childName: string) => {
+        delete newHousehold.世帯員[childName];
+      });
     }
 
+    // 新しい子どもの情報を追加
     newHousehold.世帯.世帯1.児童一覧 = [...Array(childrenNum)].map(
       (val, i) => `子ども${i}`
     );
-    console.log(newHousehold);
+    if (newHousehold.世帯.世帯1.児童一覧) {
+      newHousehold.世帯.世帯1.児童一覧.map((childName: string) => {
+        newHousehold.世帯員[childName] = {
+          誕生年月日: { ETERNITY: "" },
+          身体障害者手帳等級認定: { ETERNITY: "無" },
+          // 身体障害者手帳交付年月日は入力作業を省略させるため昨年の日付を設定
+          // (身体障害者手帳等級認定は身体障害者手帳交付年月日から2年以内が有効)
+          身体障害者手帳交付年月日: { ETERNITY: lastYearDate },
+        };
+      });
+    }
     setHousehold({ ...newHousehold });
   }, []);
 
