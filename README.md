@@ -99,7 +99,7 @@ make serve-local
 - 事前準備  
 Github CodeSpace或いは自分のPCでバックエンドのdocker環境に入る。
 
-- テスト
+- テスト実行
   - 全てのテストを実行  
   `make test` 
   - 一部のテストを実行  
@@ -112,3 +112,10 @@ openfisca_japan/variables/~.py等の計算方法を規定するファイルを�
 `make build`   
 その後、上述のテストを行う。
 
+- テスト条件・結果を記載したCSVファイルから、yamlのテストファイルを自動生成する方法
+  ```
+  cd make_tests
+  bash generate.sh
+  ```
+  上記コマンドで openfisca_japan/tests/generated 以下にyamlのテストファイルが作成される。  
+  そのテストファイルを上述の方法でテストする。
