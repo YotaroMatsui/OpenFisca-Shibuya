@@ -19,3 +19,6 @@ venv
 
 .DS_Store
 *~
+
+# generated test files
+**/generated/*.yml
