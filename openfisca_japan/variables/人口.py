@@ -54,6 +54,8 @@ class 年齢(Variable):
         return (対象期間.start.year - 誕生年) - where(誕生日を過ぎている, 0, 1)  # If the birthday is not passed this year, subtract one year
 
 
+# 小学n年生はn, 中学m年生はm+6, 高校l年生はl+9, 
+# 小学生未満は0以下の整数, 高校3年生より大きい学年は13以上の整数を返す
 class 学年(Variable):
     value_type = int
     entity = 人物
@@ -62,15 +64,17 @@ class 学年(Variable):
 
     def formula(対象人物, 対象期間, _parameters):
         誕生年月日 = 対象人物("誕生年月日", 対象期間)
+        
         誕生年 = 誕生年月日.astype("datetime64[Y]").astype(int) + 1970
         誕生月 = 誕生年月日.astype("datetime64[M]").astype(int) % 12 + 1
-        # 誕生日 = (誕生年月日 - 誕生年月日.astype("datetime64[M]") + 1).astype(int)
+        誕生日 = (誕生年月日 - 誕生年月日.astype("datetime64[M]") + 1).astype(int)
+        
+        # 早生まれは誕生月日が1/1~4/1
+        早生まれ = (誕生月 < 4) + ((誕生月 == 4) * (誕生日 == 1))
+        対象期間が四月以降 = 対象期間.start.month >= 4
+        繰り上げ年数 = where(早生まれ, 1, 0) + where(対象期間が四月以降, 1, 0)
 
-        対象期間において早生まれ = (誕生月 < 4) * (4 <= 対象期間.start.month)
-        早生まれではないが四月以降 = (4 < 誕生月) * (4 <= 対象期間.start.month)
-        学年を繰り上げるべき = 対象期間において早生まれ + 早生まれではないが四月以降
-
-        return (対象期間.start.year - 誕生年) + where(学年を繰り上げるべき, 1, 0)
+        return (対象期間.start.year - 誕生年) + 繰り上げ年数 - 7
 
 
 class 行方不明年月日(Variable):
