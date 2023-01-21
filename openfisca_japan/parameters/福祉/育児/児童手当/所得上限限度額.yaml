@@ -1,4 +1,4 @@
-description: 渋谷区の児童手当の所得上限限度額(扶養人数が0人から増えるごとに増額)
+description: 渋谷区の児童手当の所得上限限度額(扶養人数が0人から増えるごとに増額する)
 metadata:
   threshold_unit: person
   rate_unit: 1
