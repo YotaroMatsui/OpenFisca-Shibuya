@@ -8,26 +8,52 @@ See https://openfisca.org/doc/key-concepts/variables.html
 
 # Import from openfisca-core the Python objects used to code the legislation in OpenFisca
 from openfisca_core.holders import set_input_divide_by_period
-from openfisca_core.periods import MONTH
+from openfisca_core.periods import MONTH, DAY
 from openfisca_core.variables import Variable
 # Import the Entities specifically defined for this tax and benefit system
-from openfisca_japan.entities import 人物
+from openfisca_japan.entities import 人物, 世帯
 
 
 class 所得(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    #definition_period = MONTH
+    definition_period = DAY
     # Optional attribute. Allows user to declare a 所得 for a year.
     # OpenFisca will spread the yearly 金額 over the months contained in the year.
     set_input = set_input_divide_by_period
     label = "人物の所得"
 
 
+class 世帯所得(Variable):
+    value_type = float
+    entity = 世帯
+    #definition_period = MONTH
+    definition_period = DAY
+    label = "世帯全員の収入の合計"
+
+    def formula(対象世帯, 対象期間, _parameters):
+        各収入 = 対象世帯.members("所得", 対象期間)
+        return 対象世帯.sum(各収入)
+
+
+class 世帯高所得(Variable):
+    value_type = float
+    entity = 世帯
+    #definition_period = MONTH
+    definition_period = DAY
+    label = "世帯で最も所得が高い人物の所得"
+
+    def formula(対象世帯, 対象期間, _parameters):
+        各収入 = 対象世帯.members("所得", 対象期間)
+        return 対象世帯.max(各収入)
+
+
 class 可処分所得(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    #definition_period = MONTH
+    definition_period = DAY
     label = "所得のうち、人物が実際に使える額"
 
     def formula(対象人物, 対象期間, _parameters):

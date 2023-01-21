@@ -4,6 +4,6 @@ metadata:
   unit: currency-JPY
 values:
   2022-05-01:
-    value: 10000
+    value: 5000
     metadata:
       reference: https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/jido_t.html
