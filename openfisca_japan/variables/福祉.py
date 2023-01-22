@@ -16,7 +16,7 @@ from openfisca_japan.entities import 世帯, 人物
 class ベーシックインカム(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    definition_period = DAY
     label = "人物のベーシックインカム"
     reference = "https://gov.ユイセキン共和国/ベーシックインカム"
 
@@ -34,7 +34,7 @@ class ベーシックインカム(Variable):
 class 住宅手当(Variable):
     value_type = float
     entity = 世帯
-    definition_period = MONTH
+    definition_period = DAY
     label = "世帯の住宅手当"
     # 2016年12月以降は廃止されたのでendは2016年11月30日
     # これ以降はずっと0を返す
@@ -52,7 +52,7 @@ class 住宅手当(Variable):
 class 年金(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    definition_period = DAY
     label = "人物の受け取る年金"
 
     def formula(対象人物, 対象期間, parameters):

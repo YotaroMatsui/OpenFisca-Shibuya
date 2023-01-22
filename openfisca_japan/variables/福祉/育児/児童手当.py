@@ -11,7 +11,7 @@ from openfisca_japan.entities import 世帯
 class 児童手当(Variable):
     value_type = float
     entity = 世帯
-    #definition_period = MONTH
+    #definition_period = DAY
     definition_period = DAY
     label = "保護者への児童手当"
     reference = "https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/jido_t.html"

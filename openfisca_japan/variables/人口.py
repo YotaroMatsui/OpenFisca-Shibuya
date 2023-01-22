@@ -40,7 +40,7 @@ class 死亡年月日(Variable):
 class 年齢(Variable):
     value_type = int
     entity = 人物
-    #definition_period = MONTH
+    #definition_period = DAY
     definition_period = DAY
     label = "人物の年齢"
 

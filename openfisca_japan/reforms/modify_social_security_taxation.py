@@ -48,8 +48,8 @@ class modify_social_security_taxation(Reform):
         new_bracket = Bracket(
             "new_bracket",
             data = {
-                "rate": {"2017-01-01": {"value": 0.4}},
-                "threshold": {"2017-01-01": {"value": 40000}},
+                "rate": {"2017-01-01-01": {"value": 0.4}},
+                "threshold": {"2017-01-01-01": {"value": 40000}},
                 },
             )
         brackets.append(new_bracket)

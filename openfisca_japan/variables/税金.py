@@ -9,7 +9,7 @@ See https://openfisca.org/doc/key-concepts/variables.html
 # Import from numpy the operations you need to apply on OpenFisca's population vectors
 # Import from openfisca-core the Python objects used to code the legislation in OpenFisca
 from numpy import maximum as max_
-from openfisca_core.periods import MONTH, YEAR
+from openfisca_core.periods import MONTH, YEAR, DAY
 from openfisca_core.variables import Variable
 # Import the Entities specifically defined for this tax and benefit system
 from openfisca_japan.entities import 世帯, 人物
@@ -18,7 +18,7 @@ from openfisca_japan.entities import 世帯, 人物
 class 所得税(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    definition_period = DAY
     label = "人物の所得税"
 
     def formula(対象人物, 対象期間, parameters):
@@ -28,7 +28,7 @@ class 所得税(Variable):
 class 住民税(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    definition_period = DAY
     label = "渋谷区に住む人物の住民税"
     reference = "https://www.city.shibuya.tokyo.jp/kurashi/zeikin/juminzei/juminzei_fuka.html"
 
@@ -43,7 +43,7 @@ class 住民税(Variable):
 class 社会保険料(Variable):
     value_type = float
     entity = 人物
-    definition_period = MONTH
+    definition_period = DAY
     label = "人物の社会保険料"
 
     def formula(対象人物, 対象期間, parameters):

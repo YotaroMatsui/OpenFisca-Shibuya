@@ -1,9 +1,9 @@
 import { useCallback, useContext } from "react";
-import { CurrentYearMonthContext } from "../../../contexts/CurrentYearMonthContext";
+import { CurrentDateContext } from "../../../contexts/CurrentDateContext";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
 export const Income = ({ personName }: { personName: string }) => {
-  const currentYearMonth = useContext(CurrentYearMonthContext);
+  const currentDate = useContext(CurrentDateContext);
   const { household, setHousehold } = useContext(HouseholdContext);
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ export const Income = ({ personName }: { personName: string }) => {
       income = 0;
     }
 
-    newHousehold.世帯員[personName].所得[currentYearMonth] = income;
+    newHousehold.世帯員[personName].所得[currentDate] = income;
     setHousehold(newHousehold);
   }, []);
 
@@ -29,7 +29,7 @@ export const Income = ({ personName }: { personName: string }) => {
         name="年収"
         className="form-control"
         type="number"
-        value={household.世帯員[personName].所得[currentYearMonth] / 10000}
+        value={household.世帯員[personName].所得[currentDate] / 10000}
         onChange={onChange}
       />
       <span className="input-group-text">万円</span>
