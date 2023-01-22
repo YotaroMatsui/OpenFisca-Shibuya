@@ -7,6 +7,6 @@
 
 - name: We will dinamically add new variable "goes_to_school" thanks to a reform
   reforms: openfisca_japan.reforms.add_dynamic_variable.add_dynamic_variable
-  period: 2017-01
+  period: 2017-01-01
   output:
     goes_to_school: true

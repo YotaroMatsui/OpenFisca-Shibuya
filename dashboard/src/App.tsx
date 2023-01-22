@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { OpenFiscaForm } from "./components/form";
 import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
-import { CurrentYearMonthContext } from "./contexts/CurrentYearMonthContext";
+import { CurrentDateContext } from "./contexts/CurrentDateContext";
 
 function App() {
-  const currentYearMonth = `${new Date().getFullYear()}-${
+  const currentDate = `${new Date().getFullYear()}-${
     new Date().getMonth() + 1
-  }`;
+  }-${new Date().getDate()}`;
 
   const [yourself, setYourself] = useState({
     誕生年月日: undefined,
@@ -27,7 +27,7 @@ function App() {
       あなた: {
         誕生年月日: { ETERNITY: "" },
         所得: {
-          [currentYearMonth]: 0,
+          [currentDate]: 0,
         },
       },
     },
@@ -35,16 +35,19 @@ function App() {
       世帯1: {
         保護者一覧: ["あなた"],
         児童手当: {
-          [currentYearMonth]: null,
+          [currentDate]: null,
         },
         児童扶養手当: {
-          [currentYearMonth]: null,
+          [currentDate]: null,
+        },
+        児童育成手当: {
+          [currentDate]: null,
         },
         特別児童扶養手当: {
-          [currentYearMonth]: null,
+          [currentDate]: null,
         },
         障害児童育成手当: {
-          [currentYearMonth]: null,
+          [currentDate]: null,
         },
       },
     },
@@ -65,7 +68,7 @@ function App() {
   }, []);
 
   return (
-    <CurrentYearMonthContext.Provider value={currentYearMonth}>
+    <CurrentDateContext.Provider value={currentDate}>
       <YourselfContext.Provider value={yourselfContextValue}>
         <HouseholdContext.Provider value={householdContextValue}>
           <div className="container">
@@ -109,7 +112,7 @@ function App() {
           </div>
         </HouseholdContext.Provider>
       </YourselfContext.Provider>
-    </CurrentYearMonthContext.Provider>
+    </CurrentDateContext.Provider>
   );
 }
 

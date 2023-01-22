@@ -3,7 +3,7 @@ metadata:
   reference: https://fr.wikipedia.org/wiki/Retraite_(économie)
   unit: year
 values:
-  2017-01-01:
+  2017-01-01-01:
     value: 62.0
   1951-07-01:
     value: 60.33

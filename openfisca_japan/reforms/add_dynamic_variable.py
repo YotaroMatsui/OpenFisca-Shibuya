@@ -43,7 +43,7 @@ class add_dynamic_variable(Reform):
             value_type = bool,
             entity = 人物,
             default_value = True,
-            definition_period = MONTH,
+            definition_period = DAY,
             label = "The 人物 goes to school (only relevant for children)",
             reference = "https://law.gov.example/goes_to_school",
             )

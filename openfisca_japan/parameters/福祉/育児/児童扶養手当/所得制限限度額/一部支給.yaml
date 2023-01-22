@@ -1,41 +1,14 @@
-description: 渋谷区の児童扶養手当の一部支給の所得制限限度額
+description: 渋谷区の児童扶養手当の一部支給の所得制限限度額(扶養人数が0人から増えるごとに増額する)
 metadata:
   threshold_unit: person
   rate_unit: 1
-brackets:
-- rate:
-    2000-05-01:
-      value: 1920000
-  threshold:
-    2000-05-01:
-      value: 0
-- rate:
-    2000-05-01:
-      value: 2300000
-  threshold:
-    2000-05-01:
-      value: 1
-- rate:
-    2000-05-01:
-      value: 2680000
-  threshold:
-    2000-05-01:
-      value: 2
-- rate:
-    2000-05-01:
-      value: 3060000
-  threshold:
-    2000-05-01:
-      value: 3
-- rate:
-    2000-05-01:
-      value: 3440000
-  threshold:
-    2000-05-01:
-      value: 4
-- rate:
-    2000-05-01:
-      value: 3820000
-  threshold:
-    2000-05-01:
-      value: 5
+  reference: https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/teate_gendogaku.html
+values:
+  2000-05-01:
+    value:
+      - 1920000
+      - 2300000
+      - 2680000
+      - 3060000
+      - 3440000
+      - 3820000

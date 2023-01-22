@@ -17,7 +17,7 @@ from openfisca_core.indexed_enums import Enum
 from openfisca_core.periods import DAY, ETERNITY, MONTH
 from openfisca_core.variables import Variable
 # Import the Entities specifically defined for this tax and benefit system
-from openfisca_japan.entities import 人物
+from openfisca_japan.entities import 人物, 世帯
 
 
 # This variable is a pure input: it doesn't have a formula
@@ -40,7 +40,8 @@ class 死亡年月日(Variable):
 class 年齢(Variable):
     value_type = int
     entity = 人物
-    definition_period = MONTH
+    #definition_period = DAY
+    definition_period = DAY
     label = "人物の年齢"
 
     def formula(対象人物, 対象期間, _parameters):
@@ -75,6 +76,27 @@ class 学年(Variable):
         繰り上げ年数 = where(早生まれ, 1, 0) + where(対象期間が四月以降, 1, 0)
 
         return (対象期間.start.year - 誕生年) + 繰り上げ年数 - 7
+
+
+class 扶養人数(Variable):
+    value_type = int
+    entity = 世帯
+    definition_period = DAY
+    label = "扶養人数"
+
+    def formula(対象世帯, 対象期間, parameters):
+        扶養控除所得金額 = parameters(対象期間).税金.扶養控除所得金額
+
+        # 扶養人数が1人ではない場合を考慮する
+        世帯所得一覧 = 対象世帯.members("所得", 対象期間)
+        児童である = 対象世帯.has_role(世帯.児童)
+        # 扶養親族に配偶者は含まれない。(親等の児童以外を扶養する場合はそれらも含む必要あり)
+        # 扶養親族の定義(参考): https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1180.htm
+        扶養親族である = 児童である * (世帯所得一覧 < 扶養控除所得金額)
+        扶養人数 = 対象世帯.sum(扶養親族である)
+
+        # この時点でndarrayからスカラーに変換しても、他から扶養人数を取得する際はndarrayに変換されて返されてしまう
+        return 扶養人数
 
 
 class 行方不明年月日(Variable):

@@ -239,7 +239,7 @@ A test that was fully specifying its entities like:
 
 ```yaml
 name: Housing tax
-  period: 2017-01
+  period: 2017-01-01
   世帯:
     - 保護者一覧: [ Alicia ]
       children: [ Michael ]
@@ -257,7 +257,7 @@ Becomes:
 
 ```yaml
 name: Housing tax
-  period: 2017-01
+  period: 2017-01-01
   input:
     世帯:
       保護者一覧: [ Alicia ]
@@ -475,9 +475,9 @@ name: 世帯 living in a 40 sq. metres accommodation while being free lodgers
   period: 2017
   input_variables:
     課税床面積:
-      2017-01: 40
+      2017-01-01: 40
     居住状況:
-      2017-01: 2
+      2017-01-01: 2
   output_variables:
     固定資産税: 0
 ```
@@ -489,9 +489,9 @@ name: 世帯 living in a 40 sq. metres accommodation while being free lodgers
   period: 2017
   input_variables:
     課税床面積:
-      2017-01: 40
+      2017-01-01: 40
     居住状況:
-      2017-01: free_lodger
+      2017-01-01: free_lodger
   output_variables:
     固定資産税: 0
 ```
