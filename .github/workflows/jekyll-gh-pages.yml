@@ -14,9 +14,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  
-env:
-  SERVER: production
 
 # Allow one concurrent deployment
 concurrency:
@@ -46,6 +43,8 @@ jobs:
           npm ci
           npm run build
         working-directory: ./dashboard
+        env:
+          GITHUB_PAGES: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
