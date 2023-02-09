@@ -45,5 +45,8 @@ test:
 serve-local:
 	openfisca serve --country-package openfisca_japan --bind 0.0.0.0:50000
 
+serve-public:
+	openfisca serve --country-package openfisca_japan --bind 0.0.0.0:8080
+
 calc:
 	curl -s -X POST -H "Content-Type: application/json" -d @calculate_api_example.json http://localhost:50000/calculate | jq .
