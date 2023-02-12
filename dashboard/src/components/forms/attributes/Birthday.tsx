@@ -78,47 +78,17 @@ export const Birthday = ({ personName }: { personName: string }) => {
   }, [selectedYear, selectedMonth, selectedDate]);
 
   return (
-    <div className="input-group input-group-lg mb-3">
-      <span className="input-group-text">生年月日</span>
-      <select className="form-select" onChange={(e) => handleYearChange(e)}>
-        <option value={""} key={0}></option>
-        {yearArray.map((year) => (
-          <option value={year} key={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-      <span className="input-group-text">年</span>
-      <select className="form-select" onChange={(e) => handleMonthChange(e)}>
-        <option value={""} key={0}></option>
-        {monthArray.map((month) => (
-          <option value={month} key={month}>
-            {month}
-          </option>
-        ))}
-      </select>
-      <span className="input-group-text">月</span>
-      <select className="form-select" onChange={(e) => handleDateChange(e)}>
-        <option value={""} key={0}></option>
-        {dateArray.map((date) => (
-          <option value={date} key={date}>
-            {date}
-          </option>
-        ))}
-      </select>
-      <span className="input-group-text">日</span>
-    </div>
-
-    /*
-    // inlineフォーム形式
     <div className="row g-3 align-items-center">
       <div className="col-auto">
         <label className="col-form-label">生年月日</label>
       </div>
       <div className="col-auto">
-        <select className="form-select">
-          {yearList.map((year) => (
-            <option value={year}>{year}</option>
+        <select className="form-select" onChange={(e) => handleYearChange(e)}>
+          <option value={""} key={0}></option>
+          {yearArray.map((year) => (
+            <option value={year} key={year}>
+              {year}
+            </option>
           ))}
         </select>
       </div>
@@ -126,9 +96,12 @@ export const Birthday = ({ personName }: { personName: string }) => {
         <label className="col-form-label">年</label>
       </div>
       <div className="col-auto">
-        <select className="form-select">
-          {[...Array(12)].map((_, i) => (
-            <option value={i + 1}>{i + 1}</option>
+        <select className="form-select" onChange={(e) => handleMonthChange(e)}>
+          <option value={""} key={0}></option>
+          {monthArray.map((month) => (
+            <option value={month} key={month}>
+              {month}
+            </option>
           ))}
         </select>
       </div>
@@ -136,9 +109,12 @@ export const Birthday = ({ personName }: { personName: string }) => {
         <label className="col-form-label">月</label>
       </div>
       <div className="col-auto">
-        <select className="form-select">
-          {[...Array(31)].map((_, i) => (
-            <option value={i + 1}>{i + 1}</option>
+        <select className="form-select" onChange={(e) => handleDateChange(e)}>
+          <option value={""} key={0}></option>
+          {dateArray.map((date) => (
+            <option value={date} key={date}>
+              {date}
+            </option>
           ))}
         </select>
       </div>
@@ -146,6 +122,5 @@ export const Birthday = ({ personName }: { personName: string }) => {
         <label className="col-form-label">日</label>
       </div>
     </div>
-    */
   );
 };
