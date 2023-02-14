@@ -1,4 +1,4 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { YourselfContext } from "../../../contexts/YourselfContext";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
@@ -11,11 +11,16 @@ export const ChildrenNum = () => {
   const { yourself, setYourself } = useContext(YourselfContext);
   const { household, setHousehold } = useContext(HouseholdContext);
 
+  const [shownChildrenNum, setShownChildrenNum] = useState<string | number>("");
+
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     let childrenNum = parseInt(event.currentTarget.value);
     // 正の整数以外は0に変換
     if (isNaN(childrenNum) || childrenNum < 0) {
       childrenNum = 0;
+      setShownChildrenNum("");
+    } else {
+      setShownChildrenNum(childrenNum);
     }
     const newYourself = Object.assign(yourself, {
       子どもの数: childrenNum,
@@ -55,7 +60,7 @@ export const ChildrenNum = () => {
         name="子どもの数"
         className="form-control"
         type="number"
-        value={yourself.子どもの数}
+        value={shownChildrenNum}
         onChange={onChange}
       />
       <span className="input-group-text">人</span>
