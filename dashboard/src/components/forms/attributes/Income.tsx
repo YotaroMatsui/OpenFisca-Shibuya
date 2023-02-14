@@ -1,10 +1,12 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useState } from "react";
 import { CurrentDateContext } from "../../../contexts/CurrentDateContext";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
 export const Income = ({ personName }: { personName: string }) => {
   const currentDate = useContext(CurrentDateContext);
   const { household, setHousehold } = useContext(HouseholdContext);
+
+  const [shownIncome, setShownIncome] = useState<string | number>("");
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newHousehold = {
@@ -16,6 +18,9 @@ export const Income = ({ personName }: { personName: string }) => {
     // 正の整数以外は0に変換
     if (isNaN(income) || income < 0) {
       income = 0;
+      setShownIncome("");
+    } else {
+      setShownIncome(income / 10000);
     }
 
     newHousehold.世帯員[personName].所得[currentDate] = income;
@@ -29,7 +34,7 @@ export const Income = ({ personName }: { personName: string }) => {
         name="年収"
         className="form-control"
         type="number"
-        value={household.世帯員[personName].所得[currentDate] / 10000}
+        value={shownIncome}
         onChange={onChange}
       />
       <span className="input-group-text">万円</span>
