@@ -49,7 +49,10 @@ function App() {
         児童育成手当: {
           [currentDate]: null,
         },
-        特別児童扶養手当: {
+        特別児童扶養手当_最小: {
+          [currentDate]: null,
+        },
+        特別児童扶養手当_最大: {
           [currentDate]: null,
         },
         障害児童育成手当: {

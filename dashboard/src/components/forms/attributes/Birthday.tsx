@@ -20,8 +20,6 @@ export const Birthday = ({ personName }: { personName: string }) => {
     if (isNaN(selectedYear) || isNaN(selectedMonth)) {
       return [...Array(31)].map((_, i) => String(i + 1));
     }
-    console.log(selectedYear);
-    console.log(isNaN(selectedYear));
     const lastDate = new Date(selectedYear, selectedMonth, 1);
     lastDate.setDate(0);
     return [...Array(lastDate.getDate())].map((_, i) => String(i + 1));
@@ -54,7 +52,6 @@ export const Birthday = ({ personName }: { personName: string }) => {
     if (isNaN(selectedYear) || isNaN(selectedMonth) || isNaN(selectedDate)) {
       birthday = "";
     } else {
-      console.log([selectedYear, selectedMonth, selectedDate]);
       // 年・月が変更され選択されていた日が月末より大きい場合、1日に変更
       // （例）2020年2月29日（閏年）から年を2021に変更した場合、GUIのフォームと内部状態は2021年2月1日に年と日を変更
       // 年・月が変更され選択されていた日が月末以下の場合、日は変更しない
@@ -78,49 +75,52 @@ export const Birthday = ({ personName }: { personName: string }) => {
   }, [selectedYear, selectedMonth, selectedDate]);
 
   return (
-    <div className="row g-3 align-items-center">
-      <div className="col-auto">
-        <label className="col-form-label">生年月日</label>
+    <>
+      <label>生年月日</label>
+      <div className="row g-3 align-items-center mb-3">
+        <div className="col-auto">
+          <select className="form-select" onChange={(e) => handleYearChange(e)}>
+            <option value={""} key={0}></option>
+            {yearArray.map((year) => (
+              <option value={year} key={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-auto">
+          <label className="col-form-label">年</label>
+        </div>
+        <div className="col-auto">
+          <select
+            className="form-select"
+            onChange={(e) => handleMonthChange(e)}
+          >
+            <option value={""} key={0}></option>
+            {monthArray.map((month) => (
+              <option value={month} key={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-auto">
+          <label className="col-form-label">月</label>
+        </div>
+        <div className="col-auto">
+          <select className="form-select" onChange={(e) => handleDateChange(e)}>
+            <option value={""} key={0}></option>
+            {dateArray.map((date) => (
+              <option value={date} key={date}>
+                {date}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="col-auto">
+          <label className="col-form-label">日</label>
+        </div>
       </div>
-      <div className="col-auto">
-        <select className="form-select" onChange={(e) => handleYearChange(e)}>
-          <option value={""} key={0}></option>
-          {yearArray.map((year) => (
-            <option value={year} key={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="col-auto">
-        <label className="col-form-label">年</label>
-      </div>
-      <div className="col-auto">
-        <select className="form-select" onChange={(e) => handleMonthChange(e)}>
-          <option value={""} key={0}></option>
-          {monthArray.map((month) => (
-            <option value={month} key={month}>
-              {month}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="col-auto">
-        <label className="col-form-label">月</label>
-      </div>
-      <div className="col-auto">
-        <select className="form-select" onChange={(e) => handleDateChange(e)}>
-          <option value={""} key={0}></option>
-          {dateArray.map((date) => (
-            <option value={date} key={date}>
-              {date}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="col-auto">
-        <label className="col-form-label">日</label>
-      </div>
-    </div>
+    </>
   );
 };
