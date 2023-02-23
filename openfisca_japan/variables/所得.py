@@ -17,6 +17,7 @@ from openfisca_japan.entities import 人物, 世帯
 
 
 class 所得(Variable):
+    # NOTE: 手当によって障害者控除や寡婦控除等の額を差し引く必要があるが、世帯情報が必要なため未実装
     value_type = float
     entity = 人物
     # NOTE: 所得自体は1年ごとに定義されるが、特定の日付における各種手当に計算できるように DAY で定義

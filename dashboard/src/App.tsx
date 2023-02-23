@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { OpenFiscaForm } from "./components/form";
 import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
@@ -9,6 +9,12 @@ function App() {
   const currentDate = `${new Date().getFullYear()}-${
     new Date().getMonth() + 1
   }-${new Date().getDate()}`;
+
+  const lastYearDate = `${new Date().getFullYear() - 1}-${(
+    new Date().getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}-01`;
 
   const apiURL =
     import.meta.env.MODE === "production"
@@ -35,6 +41,12 @@ function App() {
         所得: {
           [currentDate]: 0,
         },
+        身体障害者手帳等級認定: { ETERNITY: "無" },
+        // 身体障害者手帳交付年月日は入力作業を省略させるため昨年の日付を設定
+        // (身体障害者手帳等級認定は身体障害者手帳交付年月日から2年以内が有効)
+        身体障害者手帳交付年月日: { ETERNITY: lastYearDate },
+        愛の手帳等級: { ETERNITY: "無" },
+        精神障害者保健福祉手帳等級: { ETERNITY: "無" },
       },
     },
     世帯: {
@@ -58,6 +70,9 @@ function App() {
         障害児童育成手当: {
           [currentDate]: null,
         },
+        障害児福祉手当: {
+          [currentDate]: null,
+        },
       },
     },
   });
@@ -66,58 +81,16 @@ function App() {
     setHousehold,
   };
 
-  const [spec, setSpec] = useState<any>();
-
-  useEffect(() => {
-    (async () => {
-      const newSpecRes = await fetch(`${apiURL}/spec`);
-      const newSpecJson = await newSpecRes.json();
-      setSpec(newSpecJson);
-    })();
-  }, []);
-
   return (
     <APIServerURLContext.Provider value={apiURL}>
       <CurrentDateContext.Provider value={currentDate}>
         <YourselfContext.Provider value={yourselfContextValue}>
           <HouseholdContext.Provider value={householdContextValue}>
             <div className="container">
-              <h1>OpenFisca Shibuya (非公式)</h1>
+              <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
               <hr />
               <div>
                 <OpenFiscaForm />
-              </div>
-              <hr />
-              <div>
-                <h2>仕様</h2>
-                {spec && (
-                  <>
-                    <details>
-                      <summary>世帯</summary>
-                      <pre>
-                        {JSON.stringify(
-                          spec.definitions.世帯.properties,
-                          null,
-                          2
-                        )}
-                      </pre>
-                    </details>
-                    <details>
-                      <summary>人物</summary>
-                      <pre>
-                        {JSON.stringify(
-                          spec.definitions.人物.properties,
-                          null,
-                          2
-                        )}
-                      </pre>
-                    </details>
-                    <details>
-                      <summary>エンドポイント</summary>
-                      <pre>{JSON.stringify(spec.paths, null, 2)}</pre>
-                    </details>
-                  </>
-                )}
               </div>
             </div>
           </HouseholdContext.Provider>
