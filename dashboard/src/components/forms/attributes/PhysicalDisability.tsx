@@ -6,7 +6,7 @@ export const PhysicalDisability = ({ personName }: { personName: string }) => {
 
   // ラベルとOpenFiscaの表記違いを明記(pythonは数字を頭にした変数名をつけられない)
   const items = [
-    ["なし", "無"],
+    ["", "無"],
     ["1級", "一級"],
     ["2級", "二級"],
     ["3級", "三級"],

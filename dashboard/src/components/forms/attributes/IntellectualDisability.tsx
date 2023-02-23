@@ -10,7 +10,7 @@ export const IntellectualDisability = ({
 
   // ラベルとOpenFiscaの表記違いを明記
   const items = [
-    ["なし", "無"],
+    ["", "無"],
     ["1度", "一度"],
     ["2度", "二度"],
     ["3度", "三度"],

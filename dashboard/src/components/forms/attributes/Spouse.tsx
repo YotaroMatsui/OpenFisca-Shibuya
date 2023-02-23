@@ -1,50 +1,31 @@
-import { useCallback, useContext } from "react";
-import { YourselfContext } from "../../../contexts/YourselfContext";
+import { useState, useCallback, useContext, useEffect } from "react";
+import { HouseholdContext } from "../../../contexts/HouseholdContext";
 
-export const FormYourSpouse = () => {
-  const { yourself, setYourself } = useContext(YourselfContext);
+export const Spouse = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const { household, setHousehold } = useContext(HouseholdContext);
 
+  // チェックボックスの値が変更された時
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const newYourself = Object.assign(yourself, {
-      配偶者がいる: event.currentTarget.value === "true" ? true : false,
-    });
-    setYourself({ ...newYourself });
+    setIsChecked((prev) => !prev);
+
+    // TODO: ChildrenNum.tsxを参考に配偶者情報を追加する
   }, []);
 
   return (
-    <div className="input-group input-group-lg mb-3">
-      <div className="form-check-inline">
+    <>
+      <div className="form-check mb-3">
         <input
-          className="btn-check"
-          type="radio"
-          name="配偶者"
-          id="配偶者はいない"
-          value="false"
-          checked={
-            yourself.配偶者がいる === undefined ? false : !yourself.配偶者がいる
-          }
+          className="form-check-input"
+          type="checkbox"
+          checked={isChecked}
+          id="flexCheckDefault"
           onChange={onChange}
         />
-        <label className="btn btn-outline-primary" htmlFor="配偶者はいない">
-          配偶者はいない
-        </label>
-      </div>
-      <div className="form-check-inline">
-        <input
-          className="btn-check"
-          type="radio"
-          name="配偶者"
-          id="配偶者がいる"
-          value="true"
-          checked={
-            yourself.配偶者がいる === undefined ? false : yourself.配偶者がいる
-          }
-          onChange={onChange}
-        />
-        <label className="btn btn-outline-primary" htmlFor="配偶者がいる">
+        <label className="form-check-label" htmlFor="flexCheckDefault">
           配偶者がいる
         </label>
       </div>
-    </div>
+    </>
   );
 };
