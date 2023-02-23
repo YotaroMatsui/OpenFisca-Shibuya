@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { HouseholdContext } from "../../contexts/HouseholdContext";
 import { Birthday } from "./attributes/Birthday";
-import { Income } from "./attributes/Income";
-import { PhysicalDisability } from "./attributes/PhysicalDisability";
+import { Disability } from "./attributes/Disability";
 
 export const FormChildren = () => {
   const { household, setHousehold } = useContext(HouseholdContext);
@@ -14,7 +13,7 @@ export const FormChildren = () => {
             <div key={index}>
               <h3>{index + 1}人目の子ども</h3>
               <Birthday personName={childName} />
-              <PhysicalDisability personName={childName} />
+              <Disability personName={childName} />
               <br></br>
             </div>
           )

@@ -28,6 +28,7 @@ export const Income = ({ personName }: { personName: string }) => {
   }, []);
 
   return (
+    /*
     <div className="input-group input-group-lg mb-3">
       <span className="input-group-text">年収</span>
       <input
@@ -39,5 +40,23 @@ export const Income = ({ personName }: { personName: string }) => {
       />
       <span className="input-group-text">万円</span>
     </div>
+    */
+    <>
+      <label>年収</label>
+      <div className="row g-3 align-items-center mb-3">
+        <div className="col-auto">
+          <input
+            name="年収"
+            className="form-control"
+            type="number"
+            value={shownIncome}
+            onChange={onChange}
+          />
+        </div>
+        <div className="col-auto">
+          <label className="col-form-label">万円</label>
+        </div>
+      </div>
+    </>
   );
 };
