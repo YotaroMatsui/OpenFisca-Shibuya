@@ -85,27 +85,18 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      // const newSpecRes = await fetch("http://localhost:50000/spec");
-      // const newSpecJson = await newSpecRes.json();
-      // setSpec(newSpecJson);
 
       // variablesから手当の情報のみ抽出
       const variablesRes = await fetch("http://localhost:50000/variables");
       const variablesJson = await variablesRes.json();
       const allowanceMap = new Map<string, any>();
       for (const [key, value] of Object.entries(variablesJson)) {
-        // console.log(`${key}: ${value}`);
         const variableRes = await fetch(`http://localhost:50000/variable/${key}`);
         const variableJson =  await variableRes.json();
         if(Object.hasOwn(variableJson, 'formulas') && Object.hasOwn(variableJson, 'references')){
-          // console.log('target', variableJson);
-          // console.log('id', variableJson.id);
-          // console.log('description', variableJson.description);
-          // console.log('references', variableJson.references[0]);
           allowanceMap.set(variableJson.id, variableJson)
         }
       }
-      // console.log('allowanceMap', allowanceMap);
       setAllowance(allowanceMap);
 
     })();

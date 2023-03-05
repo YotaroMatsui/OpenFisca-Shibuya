@@ -11,9 +11,8 @@ export const OpenFiscaForm = () => {
   const [allowancesContextValue, setAllowances] = useState<any>();
   useEffect(() => {
     const allowances = new Array;
-    // let allowanceMap = new Map<string, any>();
-    // allowanceMap = allowance;
-  if (result && allowance) {
+
+    if (result && allowance) {
     
       for (const [key, value] of Object.entries(Object.entries(result.世帯.世帯1))) {
         if (typeof(value[1]) === 'object') {
@@ -24,8 +23,7 @@ export const OpenFiscaForm = () => {
               allowanceDate: Object.keys(inf),
               allowanceValue: Object.values(inf)[0],
               description: allowance.get(value[0]).description,
-              reference: allowance.get(value[0]).references[0] ,
-              test: 'aa'
+              reference: allowance.get(value[0]).references[0] 
             }
           )
         }
