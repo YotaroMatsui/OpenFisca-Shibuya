@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { OpenFiscaForm } from "./components/form";
 import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
 import { CurrentDateContext } from "./contexts/CurrentDateContext";
 import { APIServerURLContext } from "./contexts/APIServerURLContext";
+import { AllowanceContext } from "./contexts/AllowanceContext";
 
 function App() {
   const currentDate = `${new Date().getFullYear()}-${
@@ -80,19 +81,50 @@ function App() {
     household,
     setHousehold,
   };
+  const [allowanceContextValue, setAllowance] = useState<any>();
+
+  useEffect(() => {
+    (async () => {
+      // const newSpecRes = await fetch("http://localhost:50000/spec");
+      // const newSpecJson = await newSpecRes.json();
+      // setSpec(newSpecJson);
+
+      // variablesから手当の情報のみ抽出
+      const variablesRes = await fetch("http://localhost:50000/variables");
+      const variablesJson = await variablesRes.json();
+      const allowanceMap = new Map<string, any>();
+      for (const [key, value] of Object.entries(variablesJson)) {
+        // console.log(`${key}: ${value}`);
+        const variableRes = await fetch(`http://localhost:50000/variable/${key}`);
+        const variableJson =  await variableRes.json();
+        if(Object.hasOwn(variableJson, 'formulas') && Object.hasOwn(variableJson, 'references')){
+          // console.log('target', variableJson);
+          // console.log('id', variableJson.id);
+          // console.log('description', variableJson.description);
+          // console.log('references', variableJson.references[0]);
+          allowanceMap.set(variableJson.id, variableJson)
+        }
+      }
+      // console.log('allowanceMap', allowanceMap);
+      setAllowance(allowanceMap);
+
+    })();
+  }, []);
 
   return (
     <APIServerURLContext.Provider value={apiURL}>
       <CurrentDateContext.Provider value={currentDate}>
         <YourselfContext.Provider value={yourselfContextValue}>
           <HouseholdContext.Provider value={householdContextValue}>
-            <div className="container">
-              <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
-              <hr />
-              <div>
-                <OpenFiscaForm />
-              </div>
+          <AllowanceContext.Provider value={allowanceContextValue}>
+          <div className="container">
+            <h1>OpenFisca Shibuya (非公式)</h1>
+            <hr />
+            <div>
+              <OpenFiscaForm />
             </div>
+          </div>
+          </AllowanceContext.Provider>
           </HouseholdContext.Provider>
         </YourselfContext.Provider>
       </CurrentDateContext.Provider>
