@@ -15,6 +15,7 @@ export const OpenFiscaForm = () => {
     if (result && allowance) {
     
       for (const [key, value] of Object.entries(Object.entries(result.世帯.世帯1))) {
+        // const linkPrefix = allowance
         if (typeof(value[1]) === 'object') {
           const inf = value[1] as { foo: unknown; }
           allowances.push(
@@ -22,15 +23,15 @@ export const OpenFiscaForm = () => {
               allowanceName: value[0],
               allowanceDate: Object.keys(inf),
               allowanceValue: Object.values(inf)[0],
-              description: allowance.get(value[0]).description,
+              description: allowance.get('linkPrefix') + allowance.get(value[0]).description,
               reference: allowance.get(value[0]).references[0] 
             }
           )
         }
   
       }
-      console.log('allowances', allowances);
-      setAllowances(allowances);//有効にすると無限に動き出す
+      // console.log('allowances', allowances);
+      setAllowances(allowances);
     }
   }, [result]);
 
@@ -42,7 +43,7 @@ export const OpenFiscaForm = () => {
         <FormChildren />
       </form>
       <h2>結果</h2>
-      {result && <pre>{JSON.stringify(result.世帯.世帯1, null, 2)}</pre>}
+      {/* {result && <pre>{JSON.stringify(result.世帯.世帯1, null, 2)}</pre>} */}
       {/* {result && <pre>{JSON.stringify(allowancesContextValue, null, 2)}</pre>} */}
       <ul className="list-group mb-3">
         {allowancesContextValue && allowancesContextValue.map((val, index) =>
@@ -51,10 +52,6 @@ export const OpenFiscaForm = () => {
             <div>
             <h6 className="my-0">{val.allowanceName}</h6>
             <small className="text-muted"><a href={val.reference} target="_blank">{val.description}</a></small>
-            <div>
-            <small className="text-muted">{val.allowanceDate}</small>
-            </div>
-
             
           </div>
           <span className="text-muted">{Number(val.allowanceValue).toLocaleString()} 円</span>

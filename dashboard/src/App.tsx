@@ -87,11 +87,13 @@ function App() {
     (async () => {
 
       // variablesから手当の情報のみ抽出
-      const variablesRes = await fetch("http://localhost:50000/variables");
+      const linkPrefix : string = '（渋谷区HP）'
+      const variablesRes = await fetch(`${apiURL}/variables`);
       const variablesJson = await variablesRes.json();
       const allowanceMap = new Map<string, any>();
+      allowanceMap.set('linkPrefix', linkPrefix);
       for (const [key, value] of Object.entries(variablesJson)) {
-        const variableRes = await fetch(`http://localhost:50000/variable/${key}`);
+        const variableRes = await fetch(`${apiURL}/variable/${key}`);
         const variableJson =  await variableRes.json();
         if(Object.hasOwn(variableJson, 'formulas') && Object.hasOwn(variableJson, 'references')){
           allowanceMap.set(variableJson.id, variableJson)
