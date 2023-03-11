@@ -111,7 +111,7 @@ function App() {
           <HouseholdContext.Provider value={householdContextValue}>
           <AllowanceContext.Provider value={allowanceContextValue}>
             <div className="container">
-            <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
+              <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
               <hr />
               <div>
                 <OpenFiscaForm />
