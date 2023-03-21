@@ -45,9 +45,6 @@ export const ChildrenNum = () => {
       newHousehold.世帯.世帯1.児童一覧.map((childName: string) => {
         newHousehold.世帯員[childName] = {
           誕生年月日: { ETERNITY: "" },
-          所得: {
-            [currentDate]: 0,
-          },
           身体障害者手帳等級認定: { ETERNITY: "無" },
           // 身体障害者手帳交付年月日は入力作業を省略させるため昨年の日付を設定
           // (身体障害者手帳等級認定は身体障害者手帳交付年月日から2年以内が有効)

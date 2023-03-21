@@ -26,7 +26,9 @@ mainブランチのソースコードがビルド・デプロイされていま�
   [フォーク・クローン・プルリクエストの流れ](https://techtechmedia.com/how-to-fork-github/)    
    リポジトリのクローンはGithub desktop, Source treeなどのツールを使うのが簡単です。
 1. 自分のPC上にクローンしたOpenfisca-Shibuyaのルートディレクトリで、WindowsならPowershell、MacならTerminalを開く。  
-以下の手順でフロントエンド・バックエンドの環境構築・起動を行う。
+以下の手順でフロントエンド・バックエンドの環境構築・起動を行う。  
+環境は同時に複数起動できない。  
+そのため、環境を変える場合は元の環境を停止してから新しく起動する。
 
     - フロントエンド・バックエンドを一括で環境構築・起動  
       ```
@@ -111,7 +113,7 @@ make serve-local
 バックエンドのdocker環境に入る。
 
 - テスト実行
-  - 全てのテストを実行  
+  - 全てのテストを実行（2023/2/25時点でエラーになるため、下の「一部のテストを実行」で確認）  
   `make test` 
   - 一部のテストを実行  
   `openfisca test --country-package openfisca_japan openfisca_japan/tests/<実行したいテストファイル或いはディレクトリパス>`    
@@ -144,4 +146,4 @@ openfisca_japan/variables/~.py等の計算方法を規定するファイルを�
 
 ## その他の情報
 
-project-inclusiveの開発方針やOpenFiscaそのもの等の情報は[本リポジトリのWiki](https://github.com/project-inclusive/OpenFisca-Shibuya/wiki)に記載しています。
+project-inclusiveの開発方針やOpenFiscaそのもの等の情報は、[本リポジトリのWiki](https://github.com/project-inclusive/OpenFisca-Shibuya/wiki)に記載しています。
