@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { OpenFiscaForm } from "./components/form";
 import { HouseholdContext } from "./contexts/HouseholdContext";
 import { YourselfContext } from "./contexts/YourselfContext";
 import { CurrentDateContext } from "./contexts/CurrentDateContext";
 import { APIServerURLContext } from "./contexts/APIServerURLContext";
+import { AllowanceContext } from "./contexts/AllowanceContext";
 
 function App() {
   const currentDate = `${new Date().getFullYear()}-${
@@ -80,12 +81,35 @@ function App() {
     household,
     setHousehold,
   };
+  const [allowanceContextValue, setAllowance] = useState<any>();
+
+  useEffect(() => {
+    (async () => {
+
+      // variablesから手当の情報のみ抽出
+      const linkPrefix : string = '（渋谷区HP）'
+      const variablesRes = await fetch(`${apiURL}/variables`);
+      const variablesJson = await variablesRes.json();
+      const allowanceMap = new Map<string, any>();
+      allowanceMap.set('linkPrefix', linkPrefix);
+      for (const [key, value] of Object.entries(variablesJson)) {
+        const variableRes = await fetch(`${apiURL}/variable/${key}`);
+        const variableJson =  await variableRes.json();
+        if(Object.hasOwn(variableJson, 'formulas') && Object.hasOwn(variableJson, 'references')){
+          allowanceMap.set(variableJson.id, variableJson)
+        }
+      }
+      setAllowance(allowanceMap);
+
+    })();
+  }, []);
 
   return (
     <APIServerURLContext.Provider value={apiURL}>
       <CurrentDateContext.Provider value={currentDate}>
         <YourselfContext.Provider value={yourselfContextValue}>
           <HouseholdContext.Provider value={householdContextValue}>
+          <AllowanceContext.Provider value={allowanceContextValue}>
             <div className="container">
               <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
               <hr />
@@ -93,6 +117,7 @@ function App() {
                 <OpenFiscaForm />
               </div>
             </div>
+          </AllowanceContext.Provider>
           </HouseholdContext.Provider>
         </YourselfContext.Provider>
       </CurrentDateContext.Provider>
