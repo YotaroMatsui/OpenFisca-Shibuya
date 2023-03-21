@@ -39,7 +39,7 @@ function App() {
     世帯員: {
       あなた: {
         誕生年月日: { ETERNITY: "" },
-        所得: {
+        収入: {
           [currentDate]: 0,
         },
         身体障害者手帳等級認定: { ETERNITY: "無" },
@@ -85,22 +85,23 @@ function App() {
 
   useEffect(() => {
     (async () => {
-
       // variablesから手当の情報のみ抽出
-      const linkPrefix : string = '（渋谷区HP）'
+      const linkPrefix: string = "（渋谷区HP）";
       const variablesRes = await fetch(`${apiURL}/variables`);
       const variablesJson = await variablesRes.json();
       const allowanceMap = new Map<string, any>();
-      allowanceMap.set('linkPrefix', linkPrefix);
+      allowanceMap.set("linkPrefix", linkPrefix);
       for (const [key, value] of Object.entries(variablesJson)) {
         const variableRes = await fetch(`${apiURL}/variable/${key}`);
-        const variableJson =  await variableRes.json();
-        if(Object.hasOwn(variableJson, 'formulas') && Object.hasOwn(variableJson, 'references')){
-          allowanceMap.set(variableJson.id, variableJson)
+        const variableJson = await variableRes.json();
+        if (
+          Object.hasOwn(variableJson, "formulas") &&
+          Object.hasOwn(variableJson, "references")
+        ) {
+          allowanceMap.set(variableJson.id, variableJson);
         }
       }
       setAllowance(allowanceMap);
-
     })();
   }, []);
 
@@ -109,15 +110,15 @@ function App() {
       <CurrentDateContext.Provider value={currentDate}>
         <YourselfContext.Provider value={yourselfContextValue}>
           <HouseholdContext.Provider value={householdContextValue}>
-          <AllowanceContext.Provider value={allowanceContextValue}>
-            <div className="container">
-              <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
-              <hr />
-              <div>
-                <OpenFiscaForm />
+            <AllowanceContext.Provider value={allowanceContextValue}>
+              <div className="container">
+                <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
+                <hr />
+                <div>
+                  <OpenFiscaForm />
+                </div>
               </div>
-            </div>
-          </AllowanceContext.Provider>
+            </AllowanceContext.Provider>
           </HouseholdContext.Provider>
         </YourselfContext.Provider>
       </CurrentDateContext.Provider>

@@ -23,7 +23,7 @@ export const Income = ({ personName }: { personName: string }) => {
       setShownIncome(income / 10000);
     }
 
-    newHousehold.世帯員[personName].所得[currentDate] = income;
+    newHousehold.世帯員[personName].収入[currentDate] = income;
     setHousehold(newHousehold);
   }, []);
 
