@@ -51,6 +51,8 @@ export const ChildrenNum = () => {
           身体障害者手帳交付年月日: { ETERNITY: lastYearDate },
           愛の手帳等級: { ETERNITY: "無" },
           精神障害者保健福祉手帳等級: { ETERNITY: "無" },
+          内部障害: { ETERNITY: "無" },
+          脳性まひ_進行性筋萎縮症: { ETERNITY: "無" },
         };
       });
     }

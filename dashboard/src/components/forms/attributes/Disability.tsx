@@ -2,6 +2,8 @@ import { useState, useCallback, useContext, useEffect } from "react";
 import { PhysicalDisability } from "./PhysicalDisability";
 import { MentalDisability } from "./MentalDisability";
 import { IntellectualDisability } from "./IntellectualDisability";
+import { InternalDisability } from "./InternalDisability";
+import { CerebralParalysis } from "./CerebralParalysis";
 import { HouseholdContext } from "../../../contexts/HouseholdContext";
 import { CurrentDateContext } from "../../../contexts/CurrentDateContext";
 
@@ -24,6 +26,8 @@ export const Disability = ({ personName }: { personName: string }) => {
       newHousehold.世帯員[personName].愛の手帳等級.ETERNITY = "無";
       newHousehold.世帯員[personName].精神障害者保健福祉手帳等級.ETERNITY =
         "無";
+      newHousehold.世帯員[personName].内部障害.ETERNITY = "無";
+      newHousehold.世帯員[personName].脳性まひ_進行性筋萎縮症.ETERNITY = "無";
       setHousehold({ ...newHousehold });
     }
 
@@ -41,16 +45,20 @@ export const Disability = ({ personName }: { personName: string }) => {
           onChange={onChange}
         />
         <label className="form-check-label" htmlFor="flexCheckDefault">
-          障害者手帳を持っている
+          障害がある
         </label>
       </div>
-      {isChecked && (
-        <>
-          <PhysicalDisability personName={personName} />
-          <MentalDisability personName={personName} />
-          <IntellectualDisability personName={personName} />
-        </>
-      )}
+      <div className="ms-3">
+        {isChecked && (
+          <>
+            <PhysicalDisability personName={personName} />
+            <MentalDisability personName={personName} />
+            <IntellectualDisability personName={personName} />
+            <InternalDisability personName={personName} />
+            <CerebralParalysis personName={personName} />
+          </>
+        )}
+      </div>
 
       <br></br>
     </>

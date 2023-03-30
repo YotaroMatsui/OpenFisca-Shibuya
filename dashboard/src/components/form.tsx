@@ -36,12 +36,11 @@ export const OpenFiscaForm = () => {
 
   return (
     <div>
-      <h2>試す</h2>
       <form>
         <FormYou />
         <FormChildren />
       </form>
-      <h2>結果</h2>
+      <h2>受けられる手当（月額）</h2>
       {/* {result && <pre>{JSON.stringify(result.世帯.世帯1, null, 2)}</pre>} */}
       {/* {result && <pre>{JSON.stringify(allowancesContextValue, null, 2)}</pre>} */}
       <ul className="list-group mb-3">

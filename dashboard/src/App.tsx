@@ -48,6 +48,8 @@ function App() {
         身体障害者手帳交付年月日: { ETERNITY: lastYearDate },
         愛の手帳等級: { ETERNITY: "無" },
         精神障害者保健福祉手帳等級: { ETERNITY: "無" },
+        内部障害: { ETERNITY: "無" },
+        脳性まひ_進行性筋萎縮症: { ETERNITY: "無" },
       },
     },
     世帯: {
@@ -114,6 +116,13 @@ function App() {
               <div className="container">
                 <h1 className="mt-3">OpenFisca Shibuya（非公式）</h1>
                 <hr />
+                <h4 className="mb-4">
+                  世帯の情報をもとに、東京都渋谷区で受けられる子育て支援の手当を簡易的に算出します。
+                  <br></br>
+                  実際に受けられる手当及び正確な給付額は自治体の窓口にお問い合わせください。
+                  <br></br>
+                  入力された情報がサーバーに保存されることはありません。
+                </h4>
                 <div>
                   <OpenFiscaForm />
                 </div>
