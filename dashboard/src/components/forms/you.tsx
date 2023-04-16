@@ -1,7 +1,6 @@
 import { Birthday } from "./attributes/Birthday";
 import { ChildrenNum } from "./attributes/ChildrenNum";
 import { Income } from "./attributes/Income";
-import { Spouse } from "./attributes/Spouse";
 import { Disability } from "./attributes/Disability";
 
 export const FormYou = () => {
@@ -12,7 +11,6 @@ export const FormYou = () => {
       <Birthday personName={yourName} />
       <Income personName={yourName} />
       <ChildrenNum />
-      <Spouse />
       <Disability personName={yourName} />
     </>
   );

@@ -55,10 +55,16 @@ function App() {
     世帯: {
       世帯1: {
         保護者一覧: ["あなた"],
+        配偶者がいるがひとり親に該当: {
+          [currentDate]: null,
+        },
         児童手当: {
           [currentDate]: null,
         },
-        児童扶養手当: {
+        児童扶養手当_最大: {
+          [currentDate]: null,
+        },
+        児童扶養手当_最小: {
           [currentDate]: null,
         },
         児童育成手当: {
@@ -91,8 +97,8 @@ function App() {
       const linkPrefix: string = "（渋谷区HP）";
       const variablesRes = await fetch(`${apiURL}/variables`);
       const variablesJson = await variablesRes.json();
-      const allowanceMap = new Map<string, any>();
-      allowanceMap.set("linkPrefix", linkPrefix);
+      const allowance = new Map<string, any>();
+      allowance.set("linkPrefix", linkPrefix);
       for (const [key, value] of Object.entries(variablesJson)) {
         const variableRes = await fetch(`${apiURL}/variable/${key}`);
         const variableJson = await variableRes.json();
@@ -100,10 +106,10 @@ function App() {
           Object.hasOwn(variableJson, "formulas") &&
           Object.hasOwn(variableJson, "references")
         ) {
-          allowanceMap.set(variableJson.id, variableJson);
+          allowance.set(variableJson.id, variableJson);
         }
       }
-      setAllowance(allowanceMap);
+      setAllowance(allowance);
     })();
   }, []);
 
