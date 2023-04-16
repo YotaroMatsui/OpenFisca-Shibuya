@@ -94,7 +94,7 @@ function App() {
   useEffect(() => {
     (async () => {
       // variablesから手当の情報のみ抽出
-      const linkPrefix: string = "（渋谷区HP）";
+      const linkPrefix: string = "渋谷区HP";
       const variablesRes = await fetch(`${apiURL}/variables`);
       const variablesJson = await variablesRes.json();
       const allowance = new Map<string, any>();
