@@ -36,7 +36,7 @@ export const Disability = ({ personName }: { personName: string }) => {
 
   return (
     <>
-      <div className="form-check mb-2">
+      <div className="form-check">
         <input
           className="form-check-input"
           type="checkbox"

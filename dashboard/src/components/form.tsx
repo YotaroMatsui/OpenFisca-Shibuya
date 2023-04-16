@@ -1,5 +1,6 @@
 import { useCalculate } from "../hooks/calculate";
 import { FormYou } from "./forms/you";
+import { FormSpouse } from "./forms/spouse";
 import { FormChildren } from "./forms/children";
 import { useContext, useEffect, useState } from "react";
 import { AllowanceContext } from "../contexts/AllowanceContext";
@@ -17,7 +18,7 @@ export const OpenFiscaForm = () => {
         Object.entries(result.世帯.世帯1)
       )) {
         // const linkPrefix = allowance
-        if (typeof value[1] === "object") {
+        if (typeof value[1] === "object" && allowance.get(value[0])) {
           const inf = value[1] as { foo: unknown };
           allowances.push({
             allowanceName: value[0],
@@ -38,6 +39,7 @@ export const OpenFiscaForm = () => {
     <div>
       <form>
         <FormYou />
+        <FormSpouse />
         <FormChildren />
       </form>
       <h2>受けられる手当（月額）</h2>
