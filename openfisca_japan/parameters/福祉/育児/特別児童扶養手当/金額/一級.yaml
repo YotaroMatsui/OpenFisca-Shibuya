@@ -3,7 +3,11 @@ metadata:
   reference: https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/jido_f.html
   unit: currency-JPY
 values:
-  2000-05-01:
+  2023-04-01:
+    value: 53700
+    metadata:
+      reference: https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/jido_f.html
+  2022-04-01:
     value: 52400
     metadata:
       reference: https://www.city.shibuya.tokyo.jp/kodomo/teate/teate/jido_f.html
